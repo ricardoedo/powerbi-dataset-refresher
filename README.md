@@ -1,5 +1,10 @@
 # Power BI Refresh Script
 
+[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Tests](https://img.shields.io/badge/tests-23%20passed-brightgreen)](https://github.com/ricardoedo/powerbi-dataset-refresher)
+[![Code Coverage](https://img.shields.io/badge/coverage-35%25-orange)](https://github.com/ricardoedo/powerbi-dataset-refresher)
+
 Script automatizado en Python para refrescar datasets de Power BI mediante autenticación con service principal de Azure AD.
 
 ## 📋 Descripción del Proyecto
