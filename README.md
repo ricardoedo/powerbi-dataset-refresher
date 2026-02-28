@@ -7,21 +7,21 @@
 
 Script automatizado en Python para refrescar datasets de Power BI mediante autenticación con service principal de Azure AD.
 
-## 📋 Descripción del Proyecto
+## Descripción del Proyecto
 
 Este proyecto proporciona una solución robusta y automatizada para refrescar datasets de Power BI sin intervención manual. Utiliza un service principal de Azure AD para autenticación, permitiendo su ejecución en entornos automatizados como cron jobs, Azure DevOps pipelines, o contenedores Docker.
 
 ### Características Principales
 
-- ✅ **Autenticación segura** con service principal de Azure AD
-- ✅ **Refresco automatizado** de múltiples datasets y workspaces
-- ✅ **Manejo robusto de errores** con reintentos inteligentes y backoff exponencial
-- ✅ **Logging estructurado** a consola y archivo con niveles configurables
-- ✅ **Configuración flexible** mediante JSON/YAML, variables de entorno o argumentos CLI
-- ✅ **Soporte Docker** para ejecución portable y consistente
-- ✅ **Resumen detallado** de ejecución con estadísticas de éxito/fallo
-- ✅ **Monitoreo en tiempo real** del estado de refrescos con polling configurable
-- ✅ **Rate limiting** automático para respetar límites de la API de Power BI
+- **Autenticación segura** con service principal de Azure AD
+- **Refresco automatizado** de múltiples datasets y workspaces
+- **Manejo robusto de errores** con reintentos inteligentes y backoff exponencial
+- **Logging estructurado** a consola y archivo con niveles configurables
+- **Configuración flexible** mediante JSON/YAML, variables de entorno o argumentos CLI
+- **Soporte Docker** para ejecución portable y consistente
+- **Resumen detallado** de ejecución con estadísticas de éxito/fallo
+- **Monitoreo en tiempo real** del estado de refrescos con polling configurable
+- **Rate limiting** automático para respetar límites de la API de Power BI
 
 ### Casos de Uso
 
@@ -31,7 +31,7 @@ Este proyecto proporciona una solución robusta y automatizada para refrescar da
 - Refrescar datasets después de procesos ETL
 - Gestionar refrescos de múltiples workspaces desde un solo script
 
-## 📦 Requisitos y Dependencias
+## Requisitos y Dependencias
 
 ### Requisitos del Sistema
 
@@ -58,7 +58,7 @@ Las dependencias principales incluyen:
 Ver `requirements.txt` para la lista completa de dependencias.
 
 
-## 🚀 Instalación
+## Instalación
 
 ### Opción 1: Instalación Local
 
@@ -127,7 +127,7 @@ docker run --rm powerbi-refresh:latest --help
 Para instrucciones detalladas de uso con Docker, consulta la [documentación de Docker](docs/docker-usage.md).
 
 
-## ⚙️ Configuración
+## Configuración
 
 El script soporta tres métodos de configuración con el siguiente orden de precedencia:
 
@@ -230,7 +230,7 @@ powerbi-refresh \
 | `--help` | - | Mostrar ayuda | - |
 
 
-## 📖 Ejemplos de Uso Básico
+## Ejemplos de Uso Básico
 
 ### Ejemplo 1: Uso con Archivo de Configuración
 
@@ -348,7 +348,7 @@ Failed datasets:
 ```
 
 
-## 🔐 Configuración de Azure y Power BI
+## Configuración de Azure y Power BI
 
 Para que el script funcione correctamente, debes configurar un service principal en Azure AD con los permisos necesarios en Power BI.
 
@@ -384,7 +384,7 @@ Esta guía incluye:
 | **Power BI Tenant** | Service principals enabled | Habilitar uso de service principals |
 
 
-## 🐳 Uso con Docker
+## Uso con Docker
 
 Docker proporciona una forma portable y consistente de ejecutar el script sin necesidad de instalar Python o dependencias localmente.
 
@@ -450,7 +450,7 @@ Para instrucciones detalladas sobre uso con Docker, incluyendo:
 Consulta: 📚 **[Guía de Uso con Docker](docs/docker-usage.md)**
 
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Problemas Comunes y Soluciones
 
@@ -601,7 +601,7 @@ Si los problemas persisten:
    - Pasos para reproducir
 
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 powerbi-refresh-script/
@@ -655,7 +655,7 @@ powerbi-refresh-script/
 └── README.md                      # Este archivo
 ```
 
-## 🧪 Desarrollo y Testing
+## Desarrollo y Testing
 
 ### Configurar Entorno de Desarrollo
 
@@ -722,7 +722,7 @@ pytest tests/property/ --hypothesis-max-examples=1000
 ```
 
 
-## 📚 Documentación Adicional
+## Documentación Adicional
 
 ### Guías Detalladas
 
@@ -780,7 +780,7 @@ El script sigue una arquitectura modular en capas:
 └──────────────────────────────────────────┘
 ```
 
-## 🔒 Seguridad y Mejores Prácticas
+## Seguridad y Mejores Prácticas
 
 ### Gestión de Credenciales
 
@@ -831,7 +831,7 @@ client_secret = client.get_secret("azure-client-secret").value
 - Revisa y audita permisos regularmente
 
 
-## 🤝 Contribuciones
+## Contribuciones
 
 Las contribuciones son bienvenidas y apreciadas. Este proyecto sigue las mejores prácticas de desarrollo colaborativo.
 
@@ -963,7 +963,7 @@ Para solicitar nuevas funcionalidades:
 - Ayuda a otros contribuidores
 
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
 
@@ -993,7 +993,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-## 🙏 Agradecimientos
+## Agradecimientos
 
 Este proyecto utiliza las siguientes bibliotecas de código abierto:
 
@@ -1006,7 +1006,7 @@ Este proyecto utiliza las siguientes bibliotecas de código abierto:
 
 Agradecimientos especiales a la comunidad de Power BI y Azure por la documentación y recursos.
 
-## 📞 Soporte y Contacto
+## Soporte y Contacto
 
 ### Obtener Ayuda
 
@@ -1021,16 +1021,16 @@ Agradecimientos especiales a la comunidad de Power BI y Azure por la documentaci
 - [Azure Setup Guide](docs/azure-setup.md) - Configuración de Azure
 - [Docker Usage Guide](docs/docker-usage.md) - Uso con Docker
 
-## 🗺️ Roadmap
+## Roadmap
 
 ### Versión Actual (v1.0)
 
-- ✅ Autenticación con service principal
-- ✅ Refresco de múltiples datasets
-- ✅ Manejo de errores y reintentos
-- ✅ Logging estructurado
-- ✅ Soporte Docker
-- ✅ Configuración flexible
+- Autenticación con service principal
+- Refresco de múltiples datasets
+- Manejo de errores y reintentos
+- Logging estructurado
+- Soporte Docker
+- Configuración flexible
 
 ### Futuras Mejoras (v1.1+)
 
