@@ -1,0 +1,81 @@
+# Docker Compose configuration for Power BI Refresh Script
+# This file simplifies running the script in a containerized environment
+
+services:
+  powerbi-refresh:
+    # Build from local Dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    # Container name for easy reference
+    container_name: powerbi-refresh-script
+    
+    # Environment variables for Azure credentials
+    # Override these with your actual values or use a .env file
+    environment:
+      # Azure AD Service Principal credentials
+      AZURE_TENANT_ID: ${AZURE_TENANT_ID:-your-tenant-id}
+      AZURE_CLIENT_ID: ${AZURE_CLIENT_ID:-your-client-id}
+      AZURE_CLIENT_SECRET: ${AZURE_CLIENT_SECRET:-your-client-secret}
+      
+      # Power BI configuration (optional - can be provided via config file)
+      POWERBI_WORKSPACE_IDS: ${POWERBI_WORKSPACE_IDS:-}
+      POWERBI_DATASET_IDS: ${POWERBI_DATASET_IDS:-}
+      
+      # Execution configuration (optional)
+      POLL_INTERVAL: ${POLL_INTERVAL:-30}
+      TIMEOUT: ${TIMEOUT:-3600}
+      MAX_RETRIES: ${MAX_RETRIES:-3}
+      
+      # Logging configuration (optional)
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      LOG_FILE: ${LOG_FILE:-/app/logs/powerbi_refresh.log}
+    
+    # Volume mounts for configuration and logs
+    volumes:
+      # Mount configuration file (read-only)
+      # Uncomment and adjust path to your config file
+      - ./config.yaml:/app/config.yaml:ro
+      
+      # Mount logs directory (read-write)
+      # Logs will be persisted on the host
+      - ./logs:/app/logs
+    
+    # Override default command to run with config file
+    # Adjust arguments as needed for your use case
+    command: ["--config", "/app/config.yaml"]
+    
+    # Restart policy (optional)
+    # Use 'no' for one-time execution, 'on-failure' for automatic retry
+    restart: "no"
+    
+    # Resource limits (optional but recommended)
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+
+# Example usage:
+#
+# 1. Using config file (recommended):
+#    docker-compose up
+#
+# 2. Using environment variables only:
+#    docker-compose run --rm powerbi-refresh --workspace-id <WORKSPACE_ID> --dataset-id <DATASET_ID>
+#
+# 3. Override command for specific execution:
+#    docker-compose run --rm powerbi-refresh --config /app/config.yaml --log-level DEBUG
+#
+# 4. Run in detached mode:
+#    docker-compose up -d
+#
+# 5. View logs:
+#    docker-compose logs -f
+#
+# 6. Stop and remove container:
+#    docker-compose down

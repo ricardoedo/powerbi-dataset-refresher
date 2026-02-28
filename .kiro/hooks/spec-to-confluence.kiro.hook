@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Sync Spec to Confluence",
+  "description": "Notifica al agente confluence-documentation para copiar el documento de spec a la carpeta de Confluence cuando se modifica",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      ".kiro/specs/**/*.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "@confluence-documentation: Por favor copia este documento de spec a la carpeta de Confluence en https://galeohelpdesk.atlassian.net/wiki/spaces/GE/folder/1525776385"
+  }
+}

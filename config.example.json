@@ -1,0 +1,87 @@
+{
+  "_comment": "Example configuration file for Power BI Refresh Script",
+  "_comment_usage": "Copy this file to config.json and fill in your actual values",
+  "_comment_env_syntax": "You can use ${VAR_NAME} syntax to reference environment variables in any string field",
+  
+  "azure": {
+    "_comment": "Azure AD service principal credentials",
+    "_comment_env_vars": "You can reference environment variables using ${VAR_NAME} syntax",
+    
+    "tenant_id": "${AZURE_TENANT_ID}",
+    "_comment_tenant_id": "Your Azure AD tenant ID (GUID format). Example: 12345678-1234-1234-1234-123456789abc",
+    "_example_tenant_id": "Or use a literal value: 00000000-0000-0000-0000-000000000000",
+    
+    "client_id": "${AZURE_CLIENT_ID}",
+    "_comment_client_id": "Service principal application (client) ID (GUID format)",
+    "_example_client_id": "Get from Azure Portal > App Registrations > Your App > Application (client) ID",
+    
+    "client_secret": "${AZURE_CLIENT_SECRET}",
+    "_comment_client_secret": "Service principal client secret - IMPORTANT: Store securely!",
+    "_example_client_secret": "Get from Azure Portal > App Registrations > Your App > Certificates & secrets"
+  },
+  
+  "powerbi": {
+    "_comment": "Power BI workspace and dataset configuration",
+    "workspaces": [
+      {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "_comment_id": "Workspace GUID - get from Power BI workspace URL",
+        
+        "datasets": [
+          "00000000-0000-0000-0000-000000000000",
+          "11111111-1111-1111-1111-111111111111"
+        ],
+        "_comment_datasets": "List of dataset GUIDs to refresh in this workspace (leave empty to refresh all)"
+      },
+      {
+        "id": "22222222-2222-2222-2222-222222222222",
+        "datasets": []
+      }
+    ],
+    "_comment_workspaces": "List of workspaces containing datasets to refresh"
+  },
+  
+  "execution": {
+    "_comment": "Execution and retry configuration",
+    
+    "poll_interval": 30,
+    "_comment_poll_interval": "Seconds between status checks during refresh (default: 30)",
+    
+    "timeout": 3600,
+    "_comment_timeout": "Maximum seconds to wait for a refresh to complete (default: 3600 = 1 hour)",
+    
+    "max_retries": 3,
+    "_comment_max_retries": "Maximum number of retry attempts for transient errors (default: 3)",
+    
+    "retry_backoff": [5, 10, 20],
+    "_comment_retry_backoff": "Seconds to wait between retry attempts (exponential backoff)"
+  },
+  
+  "logging": {
+    "_comment": "Logging configuration",
+    
+    "level": "INFO",
+    "_comment_level": "Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL (default: INFO)",
+    
+    "file": "powerbi_refresh.log",
+    "_comment_file": "Path to log file (optional, omit to log only to console)"
+  },
+  
+  "_environment_variables": {
+    "_comment": "You can also use environment variables instead of or in addition to this file",
+    "_comment_precedence": "Precedence: CLI arguments > config file > environment variables",
+    "_variables": {
+      "AZURE_TENANT_ID": "Azure tenant ID",
+      "AZURE_CLIENT_ID": "Service principal client ID",
+      "AZURE_CLIENT_SECRET": "Service principal client secret",
+      "POWERBI_WORKSPACE_IDS": "Comma-separated workspace IDs",
+      "POWERBI_DATASET_IDS": "Comma-separated dataset IDs (optional)",
+      "POLL_INTERVAL": "Polling interval in seconds",
+      "TIMEOUT": "Timeout in seconds",
+      "MAX_RETRIES": "Maximum retry attempts",
+      "RETRY_BACKOFF": "Comma-separated backoff delays",
+      "LOG_LEVEL": "Logging level",
+      "LOG_FILE": "Log file path"
+    }
+  }
+}

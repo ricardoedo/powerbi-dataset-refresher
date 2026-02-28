@@ -1,0 +1,113 @@
+# Example configuration file for Power BI Refresh Script
+# Copy this file to config.yaml and fill in your actual values
+# You can also use environment variables (see bottom of file)
+
+# Azure AD service principal credentials
+azure:
+  # Your Azure AD tenant ID (GUID format)
+  # Example: 12345678-1234-1234-1234-123456789abc
+  tenant_id: "00000000-0000-0000-0000-000000000000"
+  
+  # Service principal application (client) ID (GUID format)
+  # Get this from Azure Portal > App Registrations > Your App > Application (client) ID
+  client_id: "00000000-0000-0000-0000-000000000000"
+  
+  # Service principal client secret
+  # IMPORTANT: Store securely! Consider using environment variables instead
+  # Get this from Azure Portal > App Registrations > Your App > Certificates & secrets
+  client_secret: "your-client-secret-here"
+
+# Power BI workspace and dataset configuration
+powerbi:
+  # List of workspaces containing datasets to refresh
+  workspaces:
+    # First workspace example
+    - id: "00000000-0000-0000-0000-000000000000"
+      # Workspace GUID - get from Power BI workspace URL
+      # Example: https://app.powerbi.com/groups/00000000-0000-0000-0000-000000000000/
+      
+      # List of dataset GUIDs to refresh in this workspace
+      # Leave empty array [] to refresh all datasets in the workspace
+      datasets:
+        - "00000000-0000-0000-0000-000000000000"
+        - "11111111-1111-1111-1111-111111111111"
+    
+    # Second workspace example (refresh all datasets)
+    - id: "22222222-2222-2222-2222-222222222222"
+      datasets: []
+
+# Execution and retry configuration
+execution:
+  # Seconds between status checks during refresh
+  # Default: 30 seconds
+  # Recommended range: 10-120 seconds
+  poll_interval: 30
+  
+  # Maximum seconds to wait for a refresh to complete
+  # Default: 3600 seconds (1 hour)
+  # Adjust based on your dataset size and refresh complexity
+  timeout: 3600
+  
+  # Maximum number of retry attempts for transient errors
+  # Default: 3 attempts
+  # Transient errors include network issues, 5xx server errors, etc.
+  max_retries: 3
+  
+  # Seconds to wait between retry attempts (exponential backoff)
+  # Default: [5, 10, 20] means wait 5s, then 10s, then 20s
+  # Length should match max_retries
+  retry_backoff: [5, 10, 20]
+
+# Logging configuration
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  # Default: INFO
+  # - DEBUG: Detailed information for diagnosing problems
+  # - INFO: General informational messages
+  # - WARNING: Warning messages (non-critical issues)
+  # - ERROR: Error messages (failures)
+  # - CRITICAL: Critical errors (system failures)
+  level: "INFO"
+  
+  # Path to log file (optional)
+  # Omit or set to null to log only to console
+  # Logs are written to both console and file when specified
+  file: "powerbi_refresh.log"
+
+# ============================================================================
+# ENVIRONMENT VARIABLES
+# ============================================================================
+# You can use environment variables instead of or in addition to this file
+# 
+# Precedence order (highest to lowest):
+#   1. CLI arguments (--workspace-id, --log-level, etc.)
+#   2. Configuration file (this file)
+#   3. Environment variables (listed below)
+#
+# Supported environment variables:
+#   AZURE_TENANT_ID           - Azure tenant ID
+#   AZURE_CLIENT_ID           - Service principal client ID
+#   AZURE_CLIENT_SECRET       - Service principal client secret
+#   POWERBI_WORKSPACE_IDS     - Comma-separated workspace IDs
+#   POWERBI_DATASET_IDS       - Comma-separated dataset IDs (optional)
+#   POLL_INTERVAL             - Polling interval in seconds
+#   TIMEOUT                   - Timeout in seconds
+#   MAX_RETRIES               - Maximum retry attempts
+#   RETRY_BACKOFF             - Comma-separated backoff delays (e.g., "5,10,20")
+#   LOG_LEVEL                 - Logging level
+#   LOG_FILE                  - Log file path
+#
+# Example using environment variables:
+#   export AZURE_TENANT_ID="12345678-1234-1234-1234-123456789abc"
+#   export AZURE_CLIENT_ID="87654321-4321-4321-4321-cba987654321"
+#   export AZURE_CLIENT_SECRET="your-secret-here"
+#   export POWERBI_WORKSPACE_IDS="workspace-id-1,workspace-id-2"
+#   export LOG_LEVEL="DEBUG"
+#   python -m powerbi_refresh.main
+#
+# Example using CLI arguments (highest precedence):
+#   python -m powerbi_refresh.main \
+#     --config config.yaml \
+#     --workspace-id "workspace-id-1" \
+#     --log-level DEBUG \
+#     --log-file custom.log
